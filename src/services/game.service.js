@@ -11,7 +11,7 @@ const BACKEND_URL = '/'
 // genre: string,
 // }
 
-const games = [{id: 1, title: 'God Of War', releaseDate: '2022-02-22', genre: 'action', images: [], description: 'Лучшая игра на земле', platform: 'pc', }]
+const games = [{id: 1, title: 'God Of War', releaseDate: '2022-02-22', genre: 'action', images: [], description: 'Лучшая игра на земле', platform: 'pc', price: 1000, requirements: 'RAM: 100gb\nOS: windows\nHello: World', language: 'ru'}]
 
 const getNewGameId = (array) => {
     console.log(array)
@@ -72,9 +72,10 @@ export const updateGameStatus = async (id) => {
 export const updateGame = async (id, game) => {
     try{
         const gameOrder = games.findIndex(game => game.id === Number(id))
-        for (let key in Object.keys(game)){
-            if(game.key){
-                games[gameOrder].key = game.key
+        for (let key of Object.keys(game)){
+            console.log(key)
+            if(game[key]){
+                games[gameOrder][key] = game[key]
             }
         }
         console.log(games[gameOrder])
@@ -89,6 +90,15 @@ export const updateGame = async (id, game) => {
 
     }
     catch(err){
+        return Promise.reject({message: err})
+    }
+}
+
+export const getGames = async () => {
+    try{
+        return Promise.resolve(games)
+    }
+    catch (err){
         return Promise.reject({message: err})
     }
 }

@@ -1,35 +1,33 @@
-import {Dropzone, MenuItem} from '@elonkit/react'
-import {useState} from "react";
 import {Field, Form, Formik} from "formik";
 import classNames from "classnames/bind";
-import {Button, Input, Select, TextField} from "@mui/material";
-import {string, object, array} from "yup";
+import {Button, Input, Select, Slider, TextField} from "@mui/material";
+import {Dropzone, MenuItem} from "@elonkit/react";
+import {number, string, object} from "yup";
 import {useNavigate} from "react-router";
 import {updateGame} from "../../services/game.service";
 
-
-const stepTwoSchema = object().shape({
-    description: string().required('Обязательное поле').max(500),
-    files: array(),
-    platform: string().required()
+const stepThreeSchema = object().shape({
+    price: number().required().min(100, 'Цена должна быть не меньше 100 рублей'),
+    requirements: string().required().max(5000, 'Слишком много символов'),
+    language: string().required()
 })
 
-const getDataUrl = (file) => {
-    return URL.createObjectURL(file)
-}
+const languageOptions = [
+    {value: 'ru', title: 'RU'},
+    {value: 'en', title: 'EN'}
+]
+export const UpdateGameStepThree = ({data, id, setCurrentStep, setTotalValues}) => {
 
-export const UpdateGameStepTwo = ({setCurrentStep, id, data, setTotalValues}) => {
     const navigate = useNavigate()
-
 
     return (<div className='flex justify-center'>
         <Formik
             enableReinitialize={true}
-            validationSchema={stepTwoSchema}
+            validationSchema={stepThreeSchema}
             initialValues={
-                {files: data?.files || '',
-                    description: data?.description || '',
-                    platform: data?.platform || ''}
+                {price: data?.price || 0,
+                    requirements: data?.requirements || '',
+                    language: data?.language || ''}
             } onSubmit={values => {
             console.log(values)
         }}>
@@ -48,11 +46,16 @@ export const UpdateGameStepTwo = ({setCurrentStep, id, data, setTotalValues}) =>
                         {/*    onChange={handleChange}*/}
                         {/*    onBlur={handleBlur}*/}
                         {/*    value={values?.title}></input>*/}
-                        <Field name='platform'>
+                        <span>Язык</span>
+                        <Field name='language'>
                             {({field, // { name, value, onChange, onBlur }
                                   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
                                   meta,}) => {
-                                return <Input className='w-full'   placeholder={'Название игры'} {...field}></Input>
+                                return <Select className='w-full' {...field}>
+                                    {languageOptions.map((language)=> {
+                                        return <MenuItem value={language.value} key={language.id}>{language.title}</MenuItem>
+                                    })}
+                                </Select>
                             }}
                         </Field>
                         <span className='block mt-3'>
@@ -61,43 +64,35 @@ export const UpdateGameStepTwo = ({setCurrentStep, id, data, setTotalValues}) =>
 
                     </label>
                     <label className='w-full'>
-                        <Field className='' name='description'>
-                            {({field, // { name, value, onChange, onBlur }
-                                  form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-                                  meta,}) => {
-                                return <TextField multiline className='w-full' type='date' placeholder={'Название игры'} {...field}></TextField>
+                        <span>Цена</span>
+                        <Field name='price'>
+                            {({field, form: {touched, errors, meta}}) => {
+                                return <Slider min={0} max={1000} value={field.value} {...field}></Slider>
                             }}
                         </Field>
 
                     </label>
-                    <label className='w-full mb-5'>
-                        <Field className='w-full' name='files'>
+                    <label className='w-full'>
+                        <Field name='requirements'>
                             {({field, // { name, value, onChange, onBlur }
                                   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
                                   meta,}) => {
-                                return <Dropzone  accept="image/*" multiple   onChange={(event,files) => {
-                                    console.log(event,files)
-                                setFieldValue('files', [...field.value, ...files.map(file => getDataUrl(file))])}
-                                } style={{width: '300px'}}/>
+                                return <TextField className='w-full' rows={5} multiline placeholder={'Системные требования'} {...field}></TextField>
                             }}
-
-
                         </Field>
-
                     </label>
-                    <ul className='flex justify-stretch flex-wrap'>
-                        {values?.files.length && values?.files?.map(file => {
-                            return <li className='relative w-[33.3%] p-[10px]'><img className='border-blue-500 border-[1px]' src={file}/><button onClick={() => {setFieldValue('files', values.files.filter(val => val !== file))}} className='absolute right-[20px] top-[10px]'>remove</button></li>
-                        })}
-                    </ul>
+                    {values.files}
+                    {values.description}
+
                     <div className="d-flex justify-between">
                         <Button onClick={() => {
                             updateGame(id, values).then(() => {
-                                setCurrentStep('stepOne')
+                                setCurrentStep('stepTwo')
                             })
+
                         }}>Назад</Button>
                         <Button onClick={() => {
-                            data = {...data, ...values}
+                            data = {...data, values}
                             navigate('/')
                         }}>Сохранить черновик</Button>
                         <Button onClick={() => {

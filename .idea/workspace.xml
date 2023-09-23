@@ -5,26 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="293f43e8-6085-4b95-9c6b-937fb7b8fdf8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/layout.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/createGame/createGame.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/gamesList/gamesList.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/updateGame/updateGame.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/updateGame/updateGameStepOne.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/updateGame/updateGameStepTwo.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/game.service.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.prettierrc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/updateGame/updateGameStepThree.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/gamesList/gamesList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/gamesList/gamesList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/updateGame/updateGame.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/updateGame/updateGame.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/updateGame/updateGameStepOne.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/updateGame/updateGameStepOne.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/updateGame/updateGameStepTwo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/updateGame/updateGameStepTwo.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/game.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/game.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -40,19 +43,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Mikes/WebstormProjects/elonsoft-task",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Mikes\WebstormProjects\elonsoft-task" />
+    </key>
+  </component>
   <component name="RunManager" selected="npm.npm start">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
       <method v="2" />
@@ -82,6 +91,10 @@
       <workItem from="1695112579445" duration="4425000" />
       <workItem from="1695143779708" duration="2595000" />
       <workItem from="1695217128891" duration="4789000" />
+      <workItem from="1695285113875" duration="3240000" />
+      <workItem from="1695409389740" duration="3251000" />
+      <workItem from="1695456827783" duration="4528000" />
+      <workItem from="1695498051311" duration="5273000" />
     </task>
     <servers />
   </component>

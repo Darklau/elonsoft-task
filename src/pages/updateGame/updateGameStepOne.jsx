@@ -2,8 +2,10 @@ import {Field, Form, Formik} from "formik";
 import {useEffect, useState} from "react";
 import classNames from "classnames/bind";
 import {object, string, date} from 'yup'
-import {Input, Select} from "@mui/material";
+import {Button, Input, Select} from "@mui/material";
 import {MenuItem} from "@elonkit/react";
+import {useNavigate} from "react-router";
+import {updateGame} from "../../services/game.service";
 
 const genreOptions = [
     { id: 'action', title: 'Экшн', value: 'action' },
@@ -17,7 +19,8 @@ const genreOptions = [
     // Добавьте другие жанры по необходимости
 ];
 
-export const UpdateGameStepOne = ({data = {title: '', releaseDate: '', genre: ''}}) => {
+export const UpdateGameStepOne = ({setCurrentStep, id, setTotalValues, data}) => {
+    const navigate = useNavigate()
 
 
     const stepOneSchema = object().shape({
@@ -92,11 +95,25 @@ export const UpdateGameStepOne = ({data = {title: '', releaseDate: '', genre: ''
 
                         </Field>
                     </label>
+                    <div className="d-flex justify-between">
+                        <Button onClick={() => {
+                            updateGame(id, values).then(() => {
+                                navigate('/')
+                            })
+
+                        }}>Сохранить черновик</Button>
+                        <Button onClick={() => {
+                            updateGame(id, values).then(() => {
+                                setCurrentStep('stepTwo')
+                            })
+                        }}>Дальше</Button>
+                    </div>
 
 
                 </Form>
             )}
             </Formik>
+
         </div>
     )
 }

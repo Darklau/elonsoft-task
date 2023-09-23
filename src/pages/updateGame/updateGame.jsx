@@ -1,11 +1,12 @@
 import {Form, Formik} from "formik";
 import {UpdateGameStepOne} from "./updateGameStepOne";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Button} from "@mui/material";
 import {useNavigate, useParams} from "react-router";
 import {useQuery} from "react-query";
 import {getGame, updateGame} from "../../services/game.service";
 import {UpdateGameStepTwo} from "./updateGameStepTwo";
+import {UpdateGameStepThree} from "./updateGameStepThree";
 
 
 
@@ -13,35 +14,44 @@ import {UpdateGameStepTwo} from "./updateGameStepTwo";
 export const UpdateGame = () => {
     const {id} = useParams()
     const [currentStep, setCurrentStep] = useState('stepOne')
+    const [values, setValues] = useState({})
     const { isLoading, error, data } = useQuery(
         ['games'],
-        () => getGame(id)
+        () => getGame(id),
+        {retry: true, refetchOnReconnect: true}
     );
     const navigate = useNavigate()
-    const onUpdate = () => {
+    const onUpdate = (data) => {
+        return console.log(data)
         updateGame(id, data).then(({status}) => {
             if(status === 'ok'){
                 navigate('/')
             }
         })
     }
+
+    useEffect(() => {
+        setValues(data?.game)
+    }, [data]);
+
+
     const addGameSteps = {
         stepOne: {
             title: 'Шаг 1',
-            component: <UpdateGameStepOne data={data?.game}/> ,
+            component: <UpdateGameStepOne id={id} setTotalValues={setValues} setCurrentStep={setCurrentStep} data={data?.game}/> ,
             prevStep: null,
             nextStep: 'stepTwo'
 
         },
         stepTwo: {
             title: 'Шаг 2',
-            component: <UpdateGameStepTwo data={data?.game}/>,
+            component: <UpdateGameStepTwo id={id} setTotalValues={setValues} data={data?.game} setCurrentStep={setCurrentStep}/>,
             prevStep: 'stepOne',
             nextStep: 'stepThree'
         },
         stepThree: {
             title: 'Шаг 3',
-            component: <UpdateGameStepOne data={data?.game}/>,
+            component: <UpdateGameStepThree id={id} setTotalValues={setValues} data={data?.game} setCurrentStep={setCurrentStep}/>,
             prevStep: 'stepTwo',
         }}
 
@@ -57,15 +67,7 @@ export const UpdateGame = () => {
                 <div className="mb-5">
                     {addGameSteps[currentStep].component}
                 </div>
-                <div className="d-flex justify-between">
-                    {addGameSteps[currentStep].prevStep && (
-                        <Button onClick={() => setCurrentStep(addGameSteps[currentStep].prevStep)}>Назад</Button>
-                    )}
-                    <Button onClick={() => onUpdate()}>Сохранить черновик</Button>
-                    {addGameSteps[currentStep].nextStep && (
-                        <Button onClick={() => setCurrentStep(addGameSteps[currentStep].nextStep)}>Дальше</Button>
-                    )}
-                </div>
+
             </>
         )}
 
