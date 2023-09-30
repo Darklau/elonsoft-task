@@ -1,11 +1,12 @@
-import {Field, Form, Formik} from "formik";
-import {useEffect, useState} from "react";
+import {Field, Form, Formik, useFormik, useFormikContext} from "formik";
+import {forwardRef, useEffect, useRef, useState} from "react";
 import classNames from "classnames/bind";
 import {object, string, date} from 'yup'
 import {Button, Input, Select} from "@mui/material";
 import {MenuItem} from "@elonkit/react";
 import {useNavigate} from "react-router";
 import {updateGame} from "../../services/game.service";
+import {FormikValues} from "../../components/formikValues";
 
 const genreOptions = [
     { id: 'action', title: 'Экшн', value: 'action' },
@@ -19,8 +20,8 @@ const genreOptions = [
     // Добавьте другие жанры по необходимости
 ];
 
-export const UpdateGameStepOne = ({setCurrentStep, id, setTotalValues, data}) => {
-    const navigate = useNavigate()
+export const UpdateGameStepOne = forwardRef(({ data, setStepForm}, ref) => {
+    const [form, setForm] = useState(null)
 
 
     const stepOneSchema = object().shape({
@@ -37,6 +38,7 @@ export const UpdateGameStepOne = ({setCurrentStep, id, setTotalValues, data}) =>
             <Formik
                 enableReinitialize={true}
                 validationSchema={stepOneSchema}
+                innerRef={ref}
                 initialValues={
                     {title: data?.title || '',
                     releaseDate: data?.releaseDate || '',
@@ -46,23 +48,12 @@ export const UpdateGameStepOne = ({setCurrentStep, id, setTotalValues, data}) =>
             }}>
             {({errors,
                   touched,
-                  handleSubmit,
-                  handleChange,
-                  handleBlur,
-                setFieldValue,
-                   values}) =>  (
+                  handleSubmit,}) =>  (
                 <Form className='items-center max-w-[500px] min-w-[400px] flex flex-col gap-y-5' onSubmit={handleSubmit}>
                     <label className={classNames('text-red-600 w-full', errors?.title && touched?.title ? 'input__label-error' : '')
                     }>
-                        {/*<input*/}
-                        {/*    name='title'*/}
-                        {/*    onChange={handleChange}*/}
-                        {/*    onBlur={handleBlur}*/}
-                        {/*    value={values?.title}></input>*/}
                         <Field name='title'>
-                            {({field, // { name, value, onChange, onBlur }
-                                form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-                                meta,}) => {
+                            {({field}) => {
                                 return <Input className='w-full'   placeholder={'Название игры'} {...field}></Input>
                             }}
                         </Field>
@@ -73,9 +64,7 @@ export const UpdateGameStepOne = ({setCurrentStep, id, setTotalValues, data}) =>
                     </label>
                     <label className='w-full'>
                         <Field className='' name='releaseDate'>
-                            {({field, // { name, value, onChange, onBlur }
-                                  form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-                                  meta,}) => {
+                            {({field}) => {
                                 return <Input className='w-full' type='date' placeholder={'Название игры'} {...field}></Input>
                             }}
                         </Field>
@@ -83,9 +72,7 @@ export const UpdateGameStepOne = ({setCurrentStep, id, setTotalValues, data}) =>
                     </label>
                     <label className='w-full'>
                         <Field className='w-full' name='genre'>
-                            {({field, // { name, value, onChange, onBlur }
-                                  form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-                                  meta,}) => {
+                            {({field}) => {
                                 return <Select className='w-full' {...field}>
                                     {genreOptions.map((genre)=> {
                                         return <MenuItem value={genre.value} key={genre.id}>{genre.title}</MenuItem>
@@ -95,25 +82,11 @@ export const UpdateGameStepOne = ({setCurrentStep, id, setTotalValues, data}) =>
 
                         </Field>
                     </label>
-                    <div className="d-flex justify-between">
-                        <Button onClick={() => {
-                            updateGame(id, values).then(() => {
-                                navigate('/')
-                            })
-
-                        }}>Сохранить черновик</Button>
-                        <Button onClick={() => {
-                            updateGame(id, values).then(() => {
-                                setCurrentStep('stepTwo')
-                            })
-                        }}>Дальше</Button>
-                    </div>
-
-
+                    <FormikValues setFormik={setStepForm}/>
                 </Form>
             )}
             </Formik>
 
         </div>
     )
-}
+})

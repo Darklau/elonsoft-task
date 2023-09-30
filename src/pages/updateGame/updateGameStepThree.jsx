@@ -5,6 +5,8 @@ import {Dropzone, MenuItem} from "@elonkit/react";
 import {number, string, object} from "yup";
 import {useNavigate} from "react-router";
 import {updateGame} from "../../services/game.service";
+import {forwardRef} from "react";
+import {FormikValues} from "../../components/formikValues";
 
 const stepThreeSchema = object().shape({
     price: number().required().min(100, 'Цена должна быть не меньше 100 рублей'),
@@ -16,14 +18,16 @@ const languageOptions = [
     {value: 'ru', title: 'RU'},
     {value: 'en', title: 'EN'}
 ]
-export const UpdateGameStepThree = ({data, id, setCurrentStep, setTotalValues}) => {
+export const UpdateGameStepThree = forwardRef(({data, setStepForm}, ref) => {
 
     const navigate = useNavigate()
 
     return (<div className='flex justify-center'>
         <Formik
+
             enableReinitialize={true}
             validationSchema={stepThreeSchema}
+            innerRef={ref}
             initialValues={
                 {price: data?.price || 0,
                     requirements: data?.requirements || '',
@@ -34,6 +38,7 @@ export const UpdateGameStepThree = ({data, id, setCurrentStep, setTotalValues}) 
             {({errors,
                   touched,
                   handleSubmit,
+                isValid,
                   handleChange,
                   handleBlur,
                   setFieldValue,
@@ -70,6 +75,7 @@ export const UpdateGameStepThree = ({data, id, setCurrentStep, setTotalValues}) 
                                 return <Slider min={0} max={1000} value={field.value} {...field}></Slider>
                             }}
                         </Field>
+                        <span>{values?.price ? values?.price : 0}</span>
 
                     </label>
                     <label className='w-full'>
@@ -81,28 +87,8 @@ export const UpdateGameStepThree = ({data, id, setCurrentStep, setTotalValues}) 
                             }}
                         </Field>
                     </label>
-                    {values.files}
-                    {values.description}
-
-                    <div className="d-flex justify-between">
-                        <Button onClick={() => {
-                            updateGame(id, values).then(() => {
-                                setCurrentStep('stepTwo')
-                            })
-
-                        }}>Назад</Button>
-                        <Button onClick={() => {
-                            data = {...data, values}
-                            navigate('/')
-                        }}>Сохранить черновик</Button>
-                        <Button onClick={() => {
-                            updateGame(id, values).then(() => {
-                                setCurrentStep('stepThree')
-                            })
-                        }}>Дальше</Button>
-                    </div>
-
+                    <FormikValues setFormik={setStepForm}/>
                 </Form>
             )}
         </Formik></div>)
-}
+})
