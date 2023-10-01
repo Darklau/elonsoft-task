@@ -8,8 +8,10 @@ import { getGame, updateGame } from '../../services/game.service'
 import { UpdateGameStepTwo } from './updateGameStepTwo'
 import { UpdateGameStepThree } from './updateGameStepThree'
 import {
-  IconCheckCircleLc, IconCloseCircleLc,
-  IconEmotionHappy, IconEmotionHappy2,
+  IconCheckCircleLc,
+  IconCloseCircleLc,
+  IconEmotionHappy,
+  IconEmotionHappy2,
   IconErrorLc,
   IconErrorW300,
   IconInformation2W400,
@@ -23,29 +25,40 @@ export const UpdateGame = () => {
   const { id } = useParams()
   const [currentStep, setCurrentStep] = useState('stepOne')
   const [values, setValues] = useState({})
-
-  const [stepOneForm, setStepOneForm] = useState({})
-  const [stepTwoForm, setStepTwoForm] = useState({})
-  const [stepThreeForm, setStepThreeForm] = useState({})
+  const [stepForms, setStepForms] = useState({
+    stepOne: {},
+    stepTwo: {},
+    stepThree: {},
+  })
   const { isLoading, error, data } = useQuery(['games'], () => getGame(id), {
-    retry: true,
-    refetchOnReconnect: true,
+    // retry: true,
+    // refetchOnReconnect: true,
   })
   const navigate = useNavigate()
-  const onDraft = async values => {
-    await updateGame(id, values)
-  }
-
   useEffect(() => {
     setValues(data?.game)
   }, [data])
+
+  const stepNavigate = step => {
+    if (!stepForms[currentStep]?.isValid) {
+      alert('Данные не заполнены')
+    } else {
+      updateGame(id, stepForms[currentStep].values).then(() => {
+        setCurrentStep(step)
+      })
+    }
+  }
 
   const addGameSteps = {
     stepOne: {
       title: 'Шаг 1',
       component: (
         <UpdateGameStepOne
-          setStepForm={setStepOneForm}
+          setStepForm={form => {
+            setStepForms(prev => {
+              return { ...prev, stepOne: form }
+            })
+          }}
           id={id}
           setTotalValues={setValues}
           setCurrentStep={setCurrentStep}
@@ -60,7 +73,11 @@ export const UpdateGame = () => {
       title: 'Шаг 2',
       component: (
         <UpdateGameStepTwo
-          setStepForm={setStepTwoForm}
+          setStepForm={form => {
+            setStepForms(prev => {
+              return { ...prev, stepTwo: form }
+            })
+          }}
           id={id}
           setTotalValues={setValues}
           data={data?.game}
@@ -75,7 +92,11 @@ export const UpdateGame = () => {
       title: 'Шаг 3',
       component: (
         <UpdateGameStepThree
-          setStepForm={setStepThreeForm}
+          setStepForm={form => {
+            setStepForms(prev => {
+              return { ...prev, stepThree: form }
+            })
+          }}
           id={id}
           setTotalValues={setValues}
           data={data?.game}
@@ -145,85 +166,47 @@ export const UpdateGame = () => {
             </Button>
           ) : null}
         </div>
-        <List sx={{position: 'fixed', right: '0', top: '0', paddingRight: '20px',paddingTop: '100px'}}>
-          <ListItem>
-            <Button
-              onClick={() => {
-                setCurrentStep('stepOne')
-              }}>
-                {stepOneForm?.dirty
-                  ? !stepOneForm.isValid
-                    ? <IconCloseCircleLc color={'red'}/>
-                    : stepOneForm.isValid
-                      ? <IconCheckCircleLc  color={'green'}/>
-                      : <IconInformationLc color={'gray'}/>
-                  : <IconInformationLc color={'gray'}/>}
-              <span
-                className={
-                  stepOneForm?.dirty
-                    ? !stepOneForm.isValid
-                      ? 'text-red-600'
-                      : stepOneForm.isValid
-                      ? 'text-green-600'
-                      : ''
-                    : 'text-gray-500'
-                }>
-                Шаг 1
-              </span>
-            </Button>
-          </ListItem>
-          <ListItem>
-            <Button
-              onClick={() => {
-                setCurrentStep('stepTwo')
-              }}>
-              {stepTwoForm?.dirty
-                ? !stepTwoForm.isValid
-                  ? <IconCloseCircleLc color={'red'}/>
-                  : stepTwoForm.isValid
-                    ? <IconCheckCircleLc  color={'green'}/>
-                    : <IconInformationLc color={'gray'}/>
-                : <IconInformationLc color={'gray'}/>}
-              <span
-                className={
-                  stepTwoForm?.dirty
-                    ? !stepTwoForm.isValid
-                      ? 'text-red-600'
-                      : stepTwoForm.isValid
+        <List
+          sx={{
+            position: 'fixed',
+            right: '0',
+            top: '0',
+            paddingRight: '20px',
+            paddingTop: '100px',
+          }}>
+          {Object.keys(stepForms).map((step, index) => (
+            <ListItem>
+              <Button
+                onClick={() => {
+                  stepNavigate(step)
+                }}>
+                {Object.values(stepForms[step]).length &&
+                Object.keys(stepForms[step]?.touched).length ? (
+                  !stepForms[step]?.isValid ? (
+                    <IconCloseCircleLc color={'red'} />
+                  ) : stepForms[step]?.isValid ? (
+                    <IconCheckCircleLc color={'green'} />
+                  ) : (
+                    <IconInformationLc color={'gray'} />
+                  )
+                ) : (
+                  <IconInformationLc color={'gray'} />
+                )}
+                <span
+                  className={Object.values(stepForms[step]).length &&
+                    Object.keys(stepForms[step]?.touched).length
+                      ? !stepForms[step]?.isValid
+                        ? 'text-red-600'
+                        : stepForms[step]?.isValid
                         ? 'text-green-600'
                         : ''
-                    : 'text-gray-500'
-                }>
-                Шаг 2
-              </span>
-            </Button>
-          </ListItem>
-          <ListItem>
-            <Button
-              onClick={() => {
-                setCurrentStep('stepThree')
-              }}>
-              {stepThreeForm?.dirty
-                ? !stepThreeForm.isValid
-                  ? <IconCloseCircleLc color={'red'}/>
-                  : stepThreeForm.isValid
-                    ? <IconCheckCircleLc  color={'green'}/>
-                    : <IconInformationLc color={'gray'}/>
-                : <IconInformationLc color={'gray'}/>}
-              <span
-                className={
-                  stepThreeForm?.dirty
-                    ? !stepThreeForm.isValid
-                      ? 'text-red-600'
-                      : stepThreeForm.isValid
-                        ? 'text-green-600'
-                        : ''
-                    : 'text-gray-500'
-                }>
-                Шаг 3
-              </span>
-            </Button>
-          </ListItem>
+                      : 'text-gray-500'
+                  }>
+                  Шаг {index + 1}
+                </span>
+              </Button>
+            </ListItem>
+          ))}
         </List>
       </Box>
     </section>

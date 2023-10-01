@@ -70,6 +70,7 @@ export const updateGameStatus = async (id) => {
 }
 
 export const updateGame = async (id, game) => {
+    console.log(id, game)
     try{
         const gameOrder = games.findIndex(game => game.id === Number(id))
         for (let key of Object.keys(game)){
@@ -85,7 +86,7 @@ export const updateGame = async (id, game) => {
             }
 
         }).catch((err) => {
-            throw new Error(err)
+            throw new Error(err?.message | 'error')
         })
 
     }
@@ -95,6 +96,7 @@ export const updateGame = async (id, game) => {
 }
 
 export const getGames = async () => {
+    console.log(games)
     try{
         return Promise.resolve(games)
     }

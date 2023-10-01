@@ -7,8 +7,8 @@ export const FormikValues = ({
                              }) => {
     const form = useFormikContext()
     useEffect(() => {
-        setFormik(form)
-    }, [Object.keys(form | {})]);
+        setTimeout(() => {setFormik(form)}, 0)
+    }, [Object.values(form | {})]);
 
     return <></>
 }
