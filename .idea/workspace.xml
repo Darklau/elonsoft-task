@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="293f43e8-6085-4b95-9c6b-937fb7b8fdf8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/utils/functional.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/formikValues.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/formikValues.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/formikValues.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/formikValues.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/createGame/createGame.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/createGame/createGame.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/gamesList/gamesList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/gamesList/gamesList.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/updateGame/updateGame.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/updateGame/updateGame.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/updateGame/updateGameStepOne.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/updateGame/updateGameStepOne.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/updateGame/updateGameStepThree.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/updateGame/updateGameStepThree.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/updateGame/updateGameStepTwo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/updateGame/updateGameStepTwo.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/game.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/game.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,22 +43,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Mikes/WebstormProjects/elonsoft-task",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\Mikes\\WebstormProjects\\elonsoft-task\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "settings.javascript.prettier",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Mikes/WebstormProjects/elonsoft-task&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\Mikes\\WebstormProjects\\elonsoft-task\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Mikes\WebstormProjects\elonsoft-task" />
@@ -94,6 +101,10 @@
       <workItem from="1695820245773" duration="5000" />
       <workItem from="1696067508779" duration="16776000" />
       <workItem from="1696108836468" duration="5739000" />
+      <workItem from="1696158421923" duration="890000" />
+      <workItem from="1696412744824" duration="16887000" />
+      <workItem from="1696501776261" duration="995000" />
+      <workItem from="1696502852400" duration="9120000" />
     </task>
     <servers />
   </component>
@@ -110,16 +121,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/pages/updateGame/updateGameStepThree.jsx</url>
-          <line>80</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
