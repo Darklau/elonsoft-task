@@ -1,15 +1,5 @@
-const BACKEND_URL = '/'
 
-//image: {id: string, gameId: string, path: string}
 
-//game:
-// {id: number,
-// title: string,
-// description: string,
-// releaseDate: string,
-// images: Image[],
-// genre: string,
-// }
 
 const games = [
   {
@@ -17,7 +7,7 @@ const games = [
     title: 'God Of War',
     releaseDate: '2022-02-22',
     genre: 'action',
-    images: [],
+    files: ['https://cs12.pikabu.ru/post_img/2022/05/26/5/165354562923971282.jpg'],
     description: 'Лучшая игра на земле',
     platform: 'pc',
     price: 1000,
@@ -30,7 +20,7 @@ const games = [
     title: 'The Witcher 3: Wild Hunt',
     releaseDate: '2015-05-19',
     genre: 'action',
-    images: [],
+    files: ['https://cs12.pikabu.ru/post_img/2022/05/26/5/165354562923971282.jpg'],
     description: 'Эпическое приключение в мире ведьмака Геральта',
     platform: 'pc, ps4, xbox',
     price: 599,
@@ -43,7 +33,7 @@ const games = [
     title: 'Minecraft',
     releaseDate: '2011-11-18',
     genre: 'sandbox',
-    images: [],
+    files: ['https://cs12.pikabu.ru/post_img/2022/05/26/5/165354562923971282.jpg'],
     description: 'Строй, выживай, исследуй в этой популярной песочнице',
     platform: 'pc, mobile, console',
     price: 1999,
@@ -56,7 +46,7 @@ const games = [
     title: 'Red Dead Redemption 2',
     releaseDate: '2018-10-26',
     genre: 'action',
-    images: [],
+    files: ['https://cs12.pikabu.ru/post_img/2022/05/26/5/165354562923971282.jpg'],
     description: 'Погрузитесь в атмосферу дикого запада',
     platform: 'pc, ps4, xbox',
     price: 799,
@@ -69,7 +59,7 @@ const games = [
     title: 'Cyberpunk 2077',
     releaseDate: '2020-12-10',
     genre: 'rpg',
-    images: [],
+    files: ['https://cs12.pikabu.ru/post_img/2022/05/26/5/165354562923971282.jpg'],
     description: 'Войдите в мир будущего с киберпанком',
     platform: 'pc, ps4, ps5, xbox one, xbox series x/s',
     price: 1299,
@@ -82,7 +72,7 @@ const games = [
     title: 'The Legend of Zelda: Breath of the Wild',
     releaseDate: '2017-03-03',
     genre: 'simulator',
-    images: [],
+    files: ['https://cs12.pikabu.ru/post_img/2022/05/26/5/165354562923971282.jpg'],
     description: 'Исследуйте мир Хайрул и спасите принцессу Зельду',
     platform: 'Nintendo Switch',
     price: 599,
@@ -92,7 +82,6 @@ const games = [
   },
 ]
 const getNewGameId = array => {
-  console.log(array)
   if (array.length === 0) {
     return 1
   }
@@ -116,26 +105,16 @@ export const createGame = async () => {
 }
 
 export const getGame = async id => {
-  try {
-    const game = games.filter(game => {
-      console.log(game, id)
-      console.log(game.id === Number(id))
-      return game.id === Number(id)
-    })
-    return Promise.resolve({ game: game[0] })
-  } catch (err) {
-    return Promise.reject({ message: err })
-  }
+  const game = games.filter(game => {
+    return game.id === Number(id)
+  })
+  return Promise.resolve({ game: game[0] })
 }
 
 export const updateGame = async (id, game) => {
-  console.log(id, game)
-    console.log(games)
   const gameOrder = games.findIndex(game => game.id === Number(id))
   for (let key of Object.keys(game)) {
-    if (game[key]) {
-      games[gameOrder][key] = game[key]
-    }
+    games[gameOrder][key] = game[key]
   }
 }
 

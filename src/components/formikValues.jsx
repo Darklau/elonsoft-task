@@ -1,6 +1,9 @@
 import {useFormikContext} from "formik";
 import {useEffect} from "react";
 
+/** Функциональный компонент, поднимающий значения полей формы, в которой он находится
+ * принимает проп setFormik - функцию React.Dispatch<React.SetStateAction>
+ */
 export const FormikValues = ({
                                  setFormik = (form) => {
                                  }
@@ -8,7 +11,8 @@ export const FormikValues = ({
     const form = useFormikContext()
     useEffect(() => {
         setTimeout(() => {setFormik(form)}, 0)
-    }, [Object.values(form | {})]);
+    }, [form.values, form.errors, form.isValid, form.touched]);
 
     return <></>
 }
+

@@ -7,12 +7,17 @@ import { string, object, array } from 'yup'
 import { useNavigate } from 'react-router'
 import { updateGame } from '../../services/game.service'
 import { FormikValues } from '../../components/formikValues'
+import { Link } from 'react-router-dom'
 
 const stepTwoSchema = object().shape({
-  description: string().required('Обязательное поле').min(7, 'Минимум 7 символов').max(500, 'Не более 500 символов'),
+  description: string()
+    .required('Обязательное поле')
+    .min(7, 'Минимум 7 символов')
+    .max(500, 'Не более 500 символов'),
   files: array()
     .required('Изображения обязательны')
-    .test('requiredArr', 'Изображения обязательны', (array) => {return array.length
+    .test('requiredArr', 'Изображения обязательны', array => {
+      return array.length
     }),
   platform: string().required('Выберите платформу'),
 })
@@ -25,7 +30,7 @@ export const UpdateGameStepTwo = forwardRef(({ data, setStepForm }, ref) => {
   return (
     <div className="flex justify-center">
       <Formik
-        enableReinitialize={true}
+        enableReinitialize={false}
         validationSchema={stepTwoSchema}
         innerRef={ref}
         validateOnMount={true}
@@ -39,99 +44,89 @@ export const UpdateGameStepTwo = forwardRef(({ data, setStepForm }, ref) => {
         }}>
         {({ errors, touched, handleSubmit, setTouched, setFieldValue, values }) => (
           <Form className="items-center w-full flex flex-col gap-y-5" onSubmit={handleSubmit}>
-            <label
-              className={classNames(
-                'w-full',
-                errors?.platform && touched?.platform ? 'input__label-error' : ''
-              )}>
-                <span className={'block mb-3'}>
-                    Платформа
-                </span>
-              <Field name="platform">
-                {({ field }) => {
-                  return <Input className="w-full" placeholder={'Название игры'} {...field}></Input>
-                }}
-              </Field>
-              <span className="block mt-3">
-                {errors?.platform && touched?.platform ? errors?.platform : null}
-              </span>
-            </label>
-            <label className={classNames(
-              'w-full',
-              errors?.description && touched?.description ? 'input__label-error' : ''
-            )}>
-                <span className={'block mb-3'}>
-                    Описание
-                </span>
-              <Field name="description">
-                {({
-                  field, // { name, value, onChange, onBlur }
-                  form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-                  meta,
-                }) => {
-                  return (
-                    <TextField
-                      multiline
-                      className="w-full"
-                      placeholder={'Название игры'}
-                      {...field}></TextField>
-                  )
-                }}
-              </Field>
-                <span className="block mt-3">
-                {errors?.description && touched?.description ? errors?.description : null}
-              </span>
-            </label>
-            <label className={classNames(
-              'w-full',
-              errors?.files && touched?.files ? 'input__label-error' : ''
-            )}>
-                <span className={'block mb-3'}>Изображения</span>
-              <Field className="w-full" name="files">
-                {({
-                  field
-                }) => {
-                  return (
-                    <Dropzone
-                      heading={'Добавьте изображения'}
-                      accept="image/*"
-                      multiple
-                      onChange={(event, files) => {
-                        setTouched({...touched, files: true})
+            <Field name="platform">
+              {({ field }) => {
+                return (
+                  <TextField
+                    label={'Платформа'}
+                    error={errors?.platform && touched?.platform}
+                    helperText={errors?.platform && touched?.platform ? errors?.platform : null}
+                    className="w-full"
+                    placeholder={'Платформа'}
+                    {...field}></TextField>
+                )
+              }}
+            </Field>
+            <Field name="description">
+              {({
+                field, // { name, value, onChange, onBlur }
+                form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+                meta,
+              }) => {
+                return (
+                  <TextField
+                    label={'Описание'}
+                    multiline
+                    error={errors?.description && touched?.description}
+                    helperText={
+                      errors?.description && touched?.description ? errors?.description : null
+                    }
+                    className="w-full"
+                    placeholder={'Описание'}
+                    {...field}></TextField>
+                )
+              }}
+            </Field>
+            <Field className="" name="files">
+              {({ field }) => {
+                return (
+                  <Dropzone
+                    className={'w-full'}
+                    helperText={errors?.files && touched?.files ? errors?.files : null}
+                    heading={'Добавьте изображения'}
+                    accept="image/*"
+                    multiple
+                    error={errors?.files && touched?.files}
+                    onChange={(event, files) => {console.log(touched)
+                      setTouched({ ...touched, files: true }).then(() => {
                         setFieldValue('files', [
                           ...field.value,
                           ...files.map(file => getDataUrl(file)),
                         ])
-                      }}
-                      style={{ width: '300px' }}
-                    />
-                  )
-                }}
+                      })
+                    }}
+                  />
+                )
+              }}
+            </Field>
+            <ul className="flex w-full justify-stretch flex-wrap">
+              {values?.files.length
+                ? values?.files?.map(file => {
+                    return (
+                      <li className="relative p-[10px]">
+                        <button
+                          onClick={() => {
+                            setTouched({ ...touched, files: true })
+                            setFieldValue(
+                              'files',
+                              values.files.filter(val => val !== file)
+                            )
+                          }}
+                          className="absolute rounded-[25%] right-[15px] top-[15px] bg-black">
+                          <IconTrash2 color={'white'} sx={{ clipRule: 'revert' }} />
+                        </button>
+                        <Link target={'_blank'} to={file}>
+                          <img
+                            alt={file}
+                            className="w-[110px]  border-blue-500 border-[1px] "
+                            src={file}
+                          />
 
-              </Field>
-                <span className="block mt-3">
-                {errors?.files && touched?.files ? errors?.files : null}
-              </span>
-            </label>
-            <ul className="flex justify-stretch flex-wrap">
-              {values?.files.length ?
-                values?.files?.map(file => {
-                  return (
-                    <li className="relative w-[33.3%] p-[10px]">
-                      <img className="border-blue-500 border-[1px] " src={file} />
-                      <button
-                        onClick={() => {
-                          setFieldValue(
-                            'files',
-                            values.files.filter(val => val !== file)
-                          )
-                        }}
-                        className="absolute rounded-[25%] right-[15px] top-[15px] bg-black">
-                        <IconTrash2 color={'white'} sx={{ clipRule: 'revert'}}/>
-                      </button>
-                    </li>
-                  )
-                }): null}
+                        </Link>
+                      </li>
+                    )
+                  })
+                : null}
             </ul>
             <FormikValues setFormik={setStepForm} />
           </Form>

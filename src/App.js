@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './index.css'
 import './App.css';
 
@@ -13,6 +13,7 @@ import {ThemeProvider} from "@mui/material";
 import {ruRU} from "@mui/material/locale";
 import {CreateGame} from "./pages/createGame/createGame";
 import {QueryClient, QueryClientProvider} from "react-query";
+import { Error404 } from './pages/404'
 
 
 function App() {
@@ -32,11 +33,6 @@ function App() {
 
   return (
     <div className="App">
-        {/*<Sidenav>*/}
-        {/*    <SidenavItem>*/}
-        {/*        <Link to={'/'}>Ваши игры</Link>*/}
-        {/*    </SidenavItem>*/}
-        {/*</Sidenav>*/}
         <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
         <BrowserRouter>
@@ -44,7 +40,8 @@ function App() {
                 <Route element={<Layout/>}>
                     <Route path={'/'} element={<GamesList/>}/>
                     <Route path={'/create'} element={<CreateGame/>}/>
-                    <Route path={'/update/:id'} element={<UpdateGame/>}/>
+                    <Route  path={'/update/:id'} element={<UpdateGame/>}/>
+                  <Route path={'*'} element={<Error404/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

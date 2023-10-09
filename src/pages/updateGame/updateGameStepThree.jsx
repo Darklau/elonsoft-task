@@ -1,15 +1,12 @@
 import { Field, Form, Formik } from 'formik'
-import classNames from 'classnames/bind'
-import { Button, Input, Select, Slider, TextField } from '@mui/material'
-import { Dropzone, MenuItem } from '@elonkit/react'
+import { TextField } from '@mui/material'
+import { MenuItem } from '@elonkit/react'
 import { number, string, object } from 'yup'
-import { useNavigate } from 'react-router'
-import { updateGame } from '../../services/game.service'
 import { forwardRef } from 'react'
 import { FormikValues } from '../../components/formikValues'
 
 const stepThreeSchema = object().shape({
-  price: number().required().min(100, 'Цена должна быть не меньше 100 рублей'),
+  price: number().required('Укажите цену').min(100, 'Цена должна быть не меньше 100 рублей'),
   requirements: string()
     .required('Введите системные требования')
     .max(5000, 'Слишком много символов'),
@@ -25,7 +22,7 @@ export const UpdateGameStepThree = forwardRef(({ data, setStepForm }, ref) => {
   return (
     <div className="flex justify-center">
       <Formik
-        enableReinitialize={true}
+        enableReinitialize={false}
         validationSchema={stepThreeSchema}
         innerRef={ref}
         validateOnMount={true}
@@ -39,47 +36,43 @@ export const UpdateGameStepThree = forwardRef(({ data, setStepForm }, ref) => {
         }}>
         {({ errors, touched, handleSubmit, values }) => (
           <Form className="items-center w-full flex flex-col gap-y-5" onSubmit={handleSubmit}>
-            <label
-              className={classNames(
-                ' w-full',
-                errors?.title && touched?.title ? 'input__label-error' : ''
-              )}>
-              <span>Язык</span>
-              <Field name="language">
-                {({ field }) => {
-                  return (
-                    <Select className="w-full" {...field}>
-                      {languageOptions.map(language => {
-                        return (
-                          <MenuItem value={language.value} key={language.id}>
-                            {language.title}
-                          </MenuItem>
-                        )
-                      })}
-                    </Select>
-                  )
-                }}
-              </Field>
-              <span className="block mt-3">
-                {errors?.language && touched?.language ? errors?.language : null}
-              </span>
-            </label>
-            <label
-              className={classNames(
-                ' w-full',
-                errors?.price && touched?.price ? 'input__label-error' : ''
-              )}>
-              <span>Цена</span>
-              <Field name="price">
-                {({ field }) => {
-                  return <Slider min={0} max={1000} value={field.value} {...field}></Slider>
-                }}
-              </Field>
-              <span>{values?.price ? values?.price : 0}</span>
-              <span className="block mt-3">
-                {errors?.price && touched?.price ? errors?.price : null}
-              </span>
-            </label>
+            <Field name="language">
+              {({ field }) => {
+                return (
+                  <TextField
+                    select
+                    label={'Язык'}
+                    error={errors?.language && touched?.title}
+                    helperText={errors?.language && touched?.language ? errors?.language : null}
+                    className="w-full"
+                    {...field}>
+                    {languageOptions.map(language => {
+                      return (
+                        <MenuItem value={language.value} key={language.id}>
+                          {language.title}
+                        </MenuItem>
+                      )
+                    })}
+                  </TextField>
+                )
+              }}
+            </Field>
+            <Field name="price">
+              {({ field }) => {
+                return (
+                  <>
+                    <TextField
+                      className={'w-full'}
+                      label={'Цена'}
+                      error={errors?.price && touched?.price}
+                      helperText={errors?.price && touched?.price ? errors?.price : null}
+                      placeholder={'Цена'}
+                      type={number}
+                      {...field}></TextField>
+                  </>
+                )
+              }}
+            </Field>
 
             <label className="w-full">
               <Field name="requirements">
@@ -87,8 +80,13 @@ export const UpdateGameStepThree = forwardRef(({ data, setStepForm }, ref) => {
                   return (
                     <TextField
                       className="w-full"
+                      label={'Системные требования'}
                       rows={5}
                       multiline
+                      error={errors?.requirements && touched?.requirements}
+                      helperText={
+                        errors?.requirements && touched?.requirements ? errors?.requirements : null
+                      }
                       placeholder={'Системные требования'}
                       {...field}></TextField>
                   )

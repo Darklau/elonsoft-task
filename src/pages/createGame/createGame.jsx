@@ -15,7 +15,7 @@ export const CreateGame = () => {
         if(data?.id){
             navigate(`/update/${data.id}`)
         }
-        else if(error){
+        else{
             navigate('/')
         }
     }, [data])
