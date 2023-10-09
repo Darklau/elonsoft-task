@@ -40,7 +40,7 @@ export const UpdateGame = () => {
     return game
   }
 
-  const checkStep = () => {
+  const checkCurrentStep = () => {
     /** Здесь идет проверка на наличие ошибок при условии, что поле заполнено
      * Если поле заполнено, но есть ошибка, форма мы говорим об этом юзеру через alert */
     for (let key in stepForms[currentStep].values) {
@@ -99,7 +99,7 @@ export const UpdateGame = () => {
   }
 
   const stepNavigate = step => {
-    if (checkStep()) {
+    if (checkCurrentStep()) {
       updateGame(id, { ...stepForms[currentStep].values, status: 'draft' }).then(() => {
         setCurrentStep(step)
       })
@@ -155,7 +155,7 @@ export const UpdateGame = () => {
             flexDirection: 'column',
             alignItems: 'center',
           }}>
-          <Card sx={{ width: 'auto', padding: '30px 40px 50px 40px' }} variant={'outlined'}>
+          <Card  sx={{ width: 'auto', padding: '30px 40px 50px 40px' }} variant={'outlined'}>
             <Typography variant={'h1'}>{addGameSteps[currentStep].title}</Typography>
             <Typography sx={{ display: 'block', marginBottom: '30px' }} variant={'subtitle1'}>
               {translateStatus[data?.game?.status]}

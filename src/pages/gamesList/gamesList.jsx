@@ -27,8 +27,7 @@ export const GamesList = () => {
       <List sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '600px' }}>
         {data &&
           data.length &&
-          data?.map(game => {
-            return (
+          data?.map(game => {if (game.status !== 'created') {return (
               <ListItem sx={{ width: '100%' }}>
                 <Card
                   sx={{
@@ -58,7 +57,7 @@ export const GamesList = () => {
                   </CardContent>
                 </Card>
               </ListItem>
-            )
+            )}
           })}
       </List>
     </Box>

@@ -42,7 +42,7 @@ export const UpdateGameStepThree = forwardRef(({ data, setStepForm }, ref) => {
                   <TextField
                     select
                     label={'Язык'}
-                    error={errors?.language && touched?.title}
+                    error={errors?.language && touched?.language}
                     helperText={errors?.language && touched?.language ? errors?.language : null}
                     className="w-full"
                     {...field}>

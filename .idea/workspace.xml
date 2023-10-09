@@ -5,21 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="293f43e8-6085-4b95-9c6b-937fb7b8fdf8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/layout.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/404.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/misc.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/formikValues.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/formikValues.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/createGame/createGame.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/createGame/createGame.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/gamesList/gamesList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/gamesList/gamesList.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/updateGame/updateGame.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/updateGame/updateGame.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/updateGame/updateGameStepOne.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/updateGame/updateGameStepOne.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/updateGame/updateGameStepThree.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/updateGame/updateGameStepThree.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/updateGame/updateGameStepTwo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/updateGame/updateGameStepTwo.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/game.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/game.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/functional.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/functional.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +62,19 @@
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
       <method v="2" />
     </configuration>
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/elonsoft-task/build/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="npm start" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -83,6 +85,12 @@
       <envs />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+        <item itemvalue="npm.build" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -114,7 +122,7 @@
       <workItem from="1696772041422" duration="5954000" />
       <workItem from="1696786142677" duration="88000" />
       <workItem from="1696786242883" duration="274000" />
-      <workItem from="1696786527762" duration="13309000" />
+      <workItem from="1696786527762" duration="14249000" />
     </task>
     <servers />
   </component>
