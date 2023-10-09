@@ -48,7 +48,7 @@ export const UpdateGameStepThree = forwardRef(({ data, setStepForm }, ref) => {
                     {...field}>
                     {languageOptions.map(language => {
                       return (
-                        <MenuItem value={language.value} key={language.id}>
+                        <MenuItem value={language.value} key={language.title}>
                           {language.title}
                         </MenuItem>
                       )
@@ -67,7 +67,7 @@ export const UpdateGameStepThree = forwardRef(({ data, setStepForm }, ref) => {
                       error={errors?.price && touched?.price}
                       helperText={errors?.price && touched?.price ? errors?.price : null}
                       placeholder={'Цена'}
-                      type={number}
+                      type={'number'}
                       {...field}></TextField>
                   </>
                 )

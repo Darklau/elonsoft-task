@@ -103,7 +103,7 @@ export const UpdateGameStepTwo = forwardRef(({ data, setStepForm }, ref) => {
               {values?.files.length
                 ? values?.files?.map(file => {
                     return (
-                      <li className="relative p-[10px]">
+                      <li key={file} className="relative p-[10px]">
                         <button
                           onClick={() => {
                             setTouched({ ...touched, files: true })

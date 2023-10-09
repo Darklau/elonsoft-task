@@ -80,7 +80,6 @@ export const UpdateGameStepOne = forwardRef(({ data, setStepForm }, ref) => {
               {({ field }) => {
                 return (
                   <TextField
-                    onEmptiedCapture={'Выберите жанр'}
                     select
                     label={'Жанр'}
                     error={errors?.genre && touched?.genre}

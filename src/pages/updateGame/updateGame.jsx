@@ -168,7 +168,7 @@ export const UpdateGame = () => {
               <div className="flex justify-center">
                 <div className="mb-5  min-w-[400px]">
                   {Object.keys(addGameSteps).map(step => (
-                    <div className={currentStep === step ? 'visible' : 'hidden'}>
+                    <div key={step} className={currentStep === step ? 'visible' : 'hidden'}>
                       {addGameSteps[step].component}
                     </div>
                   ))}
@@ -215,7 +215,7 @@ export const UpdateGame = () => {
                     title={
                       Object.values(stepForms[step].errors).length
                         ? Object.entries(stepForms[step].errors).map(error => (
-                            <ListItem>{error[0] + ': ' + error[1] + '\n'}</ListItem>
+                            <ListItem key={error[0]}>{error[0] + ': ' + error[1] + '\n'}</ListItem>
                           ))
                         : null
                     }>

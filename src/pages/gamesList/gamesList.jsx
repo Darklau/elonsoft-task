@@ -28,7 +28,7 @@ export const GamesList = () => {
         {data &&
           data.length &&
           data?.map(game => {if (game.status !== 'created') {return (
-              <ListItem sx={{ width: '100%' }}>
+              <ListItem key={game.id} sx={{ width: '100%' }}>
                 <Card
                   sx={{
                     width: '100%',
